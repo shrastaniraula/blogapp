@@ -27,14 +27,5 @@ urlpatterns = [
     path('readBlog', views.readBlog),
 
 
-
-
-
-
-
-
-
-
-
 ]
 

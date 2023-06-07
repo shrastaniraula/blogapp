@@ -10,11 +10,14 @@
 
 <body>
     <p>HOME PAGE</p>
+    {% for each in blog %}
     <div>
         <h1>{{each.title}}</h1>
         <p>Views</p>
         <a href="/users/readBlog?id={{each.id}}">Read Now</a>
     </div>
+    {% endfor %}
+
 </body>
 
-</html> 
+</html>

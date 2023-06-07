@@ -64,6 +64,10 @@ def visitHome(request):
     print(blog)
     return render(request, 'users/main.html', {'blog': blog})
 
-def readBlog():
-    return render("users/main.html")
+def readBlog(request):
+    id = request.GET.get('id')
+    details = Blog.objects.get(id=id)
+    print(details)
+    return render(request, 'users/blog.html', {'details': details})
+
 
