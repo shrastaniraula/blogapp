@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Signup Form</h1>
+    <form method="post" action="/users/signupUser">
+        {% csrf_token %}
+
+        <label for="email">Email</label>
+        <input type="email" placeholder="email" name="email">
+
+        <label for="name">Name</label>
+        <input type="name" placeholder="name" name="name">
+
+        <label for="password1">Password</label>
+        <input type="password" placeholder="password" name="password1">
+
+        <label for="password2">Confirm Password</label>
+        <input type="password" placeholder="confirm password" name="password2">
+
+        <input type="submit" value="login">
+
+    </form>
+    <p>Already registered? <a href = "/users/seeLogin">Login</a></p>
+</body>
+
+</html>

@@ -1,6 +1,4 @@
-
-
-"""blogapp URL Configuration
+"""Hackathon URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -16,15 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import include, path
-from . import viewss
+from django.urls import path
+from . import views
+
 
 urlpatterns = [
-    path('', viewss.landingPage ),
-    path('adminWork/', include('adminWorks.urls'), name="adminWork" ),
-    path('users/', include('users.urls'), name="users" ),
+    path('', views.seeSignup),
+    path('signupUser', views.signupUser),
+    path('seeLogin', views.seeLogin),
+    path('doLogin', views.doLoginUser),
+    path('visitHome', views.visitHome),
+    path('readBlog', views.readBlog),
+
+
+
+
+
+
+
 
 
 
 
 ]
+

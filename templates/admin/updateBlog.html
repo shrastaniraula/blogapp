@@ -13,6 +13,7 @@
     <h1>Add Blog</h1>
     <form method="post" action="/adminWork/updateBlog">
         {% csrf_token %}
+        <input type="text" value="{{details.id}}" name="id" readonly>
         <input type="text" value="{{details.title}}" name="title">
         <input type="text" value="{{details.description}}" name="description">
         <input type="submit" value="UPDATE">

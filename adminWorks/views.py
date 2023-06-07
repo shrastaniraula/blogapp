@@ -50,13 +50,13 @@ def addBlog(request):
             blog = Blog.objects.create(title=title, description= description)
             print("Data sent successfully")
             print(blog)
-            return render(request, 'admin/addBlog', {'message': 'Created Successfully'})
+            return render(request, 'admin/addBlog.html', {'message': 'Created Successfully'})
 
 
         except:
             traceback.print_exc()
             print("Error")
-            return render(request, 'admin/addBlog', {'message': 'An error occured'})
+            return render(request, 'admin/addBlog.html', {'message': 'An error occured'})
 
 
 def deleteBlog(request):
@@ -73,9 +73,12 @@ def editBlog(request):
     return render(request, 'admin/updateBlog.html', {'details': details})
 
 def updateBlog(request):
+    id = request.POST.get("id")
     title = request.POST.get("title")
     description = request.POST.get("description")
 
+    verify = Blog.objects.filter(id=id)
+    verify.update(title=title, description= description)
     return redirect('/adminWork/viewBlog')
 
 
