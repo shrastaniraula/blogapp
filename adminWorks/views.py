@@ -11,9 +11,6 @@ def seeLogin(request):
 def seeAddBlog(request):
     return render(request, 'admin/addBlog.html')
 
-
-
-
 def home(request):
     return render(request, 'admin/adminHome.html')
 
@@ -68,3 +65,17 @@ def deleteBlog(request):
 
     blog = Blog.objects.get(id=id).delete()
     return redirect('/adminWork/viewBlog')
+
+def editBlog(request):
+    id = request.GET.get('id')
+    details = Blog.objects.get(id=id)
+    print(details)
+    return render(request, 'admin/updateBlog.html', {'details': details})
+
+def updateBlog(request):
+    title = request.POST.get("title")
+    description = request.POST.get("description")
+
+    return redirect('/adminWork/viewBlog')
+
+

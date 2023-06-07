@@ -26,6 +26,8 @@ urlpatterns = [
     path('addBlog', views.addBlog),
     path('SeeAddBlog', views.seeAddBlog),
     path('deleteBlog', views.deleteBlog),
+    path('editBlog', views.editBlog),
+    path('updateBlog', views.updateBlog),
 
 
 
