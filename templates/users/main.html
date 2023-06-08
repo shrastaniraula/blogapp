@@ -13,7 +13,8 @@
     {% for each in blog %}
     <div>
         <h1>{{each.title}}</h1>
-        <p>Views</p>
+        <p>{{each.date}}</p>
+        <p>View: {{each.viewCount}}</p>
         <a href="/users/readBlog?id={{each.id}}">Read Now</a>
     </div>
     {% endfor %}

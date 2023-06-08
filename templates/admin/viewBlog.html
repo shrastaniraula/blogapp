@@ -19,6 +19,8 @@
                 <th>Description</th>
                 <th>Likes</th>
                 <th>Dislikes</th>
+                <th>Date</th>
+                <th>Views</th>
                 <th>Actions</th>
 
 
@@ -32,6 +34,10 @@
                 <td>{{each.description}}</td>
                 <td>{{each.likeCount}}</td>
                 <td>{{each.dislikeCount}}</td>
+                <td>{{each.date}}</td>
+                <td>{{each.viewCount}}</td>
+
+
 
                 <td>
                     <a href="/adminWork/editBlog?id={{each.id}}">Edit</a>

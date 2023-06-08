@@ -1,3 +1,4 @@
+import datetime
 import traceback
 from django.shortcuts import redirect, render
 from adminWorks.models import Admin
@@ -76,9 +77,10 @@ def updateBlog(request):
     id = request.POST.get("id")
     title = request.POST.get("title")
     description = request.POST.get("description")
+    date = datetime.date.today
 
     verify = Blog.objects.filter(id=id)
-    verify.update(title=title, description= description)
+    verify.update(title=title, description= description, date= date)
     return redirect('/adminWork/viewBlog')
 
 

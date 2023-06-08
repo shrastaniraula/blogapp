@@ -10,12 +10,49 @@
 
 <body>
     <div>
+        <p id="blogId" style="display: none;">{{details.id}}</p>
         <h1>{{details.title}}</h1>
-        <h6>{{details.description}}</h6>
+        <h2>{{details.description}}</h2>
         <p>likes: {{details.likeCount}}</p>
         <p>dislikes: {{details.dislikeCount}}</p>
+        <p>Views</p>
+        <p id="viewsCount">{{details.viewCount}}</p>
 
     </div>
+
+    <script>
+        function addView() {
+
+            console.log("\n\n\nHIIIIIII\n\n")
+
+            var x = document.getElementById("viewsCount");
+            var id = document.getElementById("blogId");
+            var finalid = id.textContent;
+            var finalviews = x.textContent;
+
+            console.log(finalid)
+            console.log(finalviews)
+
+
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/users/viewsCount?id=' + finalid + "&view=" + finalviews, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Request was successful
+                    console.log('Data saved successfully');
+                }
+            };
+            xhr.send();
+        }
+
+        addView()
+    </script>
+
 </body>
+
+
 
 </html>

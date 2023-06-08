@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 # Create your models here.
@@ -17,4 +18,7 @@ class Blog(models.Model):
     description = models.TextField(default='hi')
     likeCount =  models.IntegerField(default=0)
     dislikeCount = models.IntegerField(default=0)
+    viewCount = models.IntegerField(default=0)
+    date = models.DateField(default=datetime.date.today)
+
 
