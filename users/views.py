@@ -3,11 +3,12 @@ from django.shortcuts import render
 import smtplib
 from django.core.mail import send_mail
 import random
-
 import traceback
 from django.shortcuts import redirect, render
 from .models import User
 from adminWorks.models import Blog
+from .models import Likes
+
 
 # Create your views here.
 
@@ -16,34 +17,6 @@ def seeLogin(request):
 
 def seeSignup(request):
     return render(request, 'users/signup.html')
-
-# def signupUser(request):
-#     name = request.POST.get("name")
-#     email = request.POST.get("email")
-#     password1 = request.POST.get("password1")
-#     password2 = request.POST.get("password2")
-
-
-#     User_check = User.objects.filter(email = email)
-
-#     if password1 !=password2:
-#         return render (request, 'users/signup.html', {'message': 'Password doesnt match confirm password.'})
-
-#     if User_check.exists():
-#         return render(request, 'users/signup.html',{'message': 'This User already exists, login instead?'})
-
-#     else:
-#         try:
-#             blog = User.objects.create(name=name, email=email, password= password1)
-#             print("Data sent successfully")
-#             print(blog)
-#             return render(request, 'users/login.html', {'message': 'Signup Successful'})
-
-
-#         except:
-#             traceback.print_exc()
-#             print("Error")
-#             return render(request, 'users/signup.html', {'message': 'An error occured'})
 
 
 def signupUser(request):
@@ -63,14 +36,8 @@ def signupUser(request):
 
     else:
         try:
-            OTTP = mail_sender(request)
+            OTTP = mail_sender(request, email)
             return render(request, 'users/OTTP.html', {'OTTP': OTTP, 'name': name, 'email': email, 'password': password1})
-
-            # blog = User.objects.create(name=name, email=email, password= password1)
-            # print("Data sent successfully")
-            # print(blog)
-            # return render(request, 'users/login.html', {'message': 'Signup Successful'})
-
 
         except:
             traceback.print_exc()
@@ -106,10 +73,12 @@ def doLoginUser(request):
 
     if user_login.exists():
         print("Insideee iffffff")
+        request.session['email'] = email
+        request.session.save()
+
         return redirect('/users/visitHome')
 
     else:
-        print("Insideee elsseeeee")
         return render(request, 'users/Login.html', {'message': 'Email or password do not match'})
     
     
@@ -137,14 +106,13 @@ def viewsCount(request):
 
     # return redirect('/users/readBlog?id=1')
 
-def mail_sender(request):
-    # SMTP 서버 정보 입력
+def mail_sender(request, email):
     # server = smtplib.SMTP('smtp.gmail.com', 587)
     print("THis is email clss")
 
-    receiver_add = ['shrastatsarhs58@gmail.com']  # storing the receiver's mail id
+    receiver_add = [email]  # storing the receiver's mail id
     sender_add = 'shrastaniraula@gmail.com'  # storing the sender's mail id
-    password = 'your_app_password'  # got app and send email
+    password = 'your_password_here'  # got app and send email
 
     # storing the password to log in
     # creating the SMTP server object by giving SMPT server address and port number
@@ -182,4 +150,28 @@ def mail_sender(request):
 
     smtp_server.quit()  # terminating the server
     return newStr
+
+def liked(request):
+    situation = request.GET.get('situation')
+    id = request.GET.get('id')
+    email = request.session.email
+
+    print(f"\n\n\n{email}\n\n\n")
+
+    likes_check = Likes.objects.filter(blogId = id, email = email)
+
+    if likes_check.exists():
+        if(situation == "liked"):
+            pass
+        elif(situation == "disliked"):
+            pass
+        elif(situation== "neutral"):
+            pass
+        else:
+            pass
+
+    else:
+        liked = Likes.objects.create(id=id, email=email)
+
+
 

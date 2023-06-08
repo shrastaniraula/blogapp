@@ -27,6 +27,8 @@ urlpatterns = [
     path('readBlog', views.readBlog),
     path('viewsCount', views.viewsCount),
     path('checkOTTP', views.checkOTTP),
+    path('liked', views.liked),
+
 
 
 

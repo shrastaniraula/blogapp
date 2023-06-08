@@ -5,6 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 40px;
+        }
+
+        /* button { */
+        /* cursor: pointer; */
+        /* outline: 0; */
+        /* color: #AAA; */
+
+        /* } */
+
+        /* .btn:focus {
+            outline: none;
+        } */
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+
     <title>Blog</title>
 </head>
 
@@ -13,6 +39,87 @@
         <p id="blogId" style="display: none;">{{details.id}}</p>
         <h1>{{details.title}}</h1>
         <h2>{{details.description}}</h2>
+
+
+
+        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+
+        <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+        <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+
+        <script>
+            var btn1 = document.querySelector('#green');
+            var btn2 = document.querySelector('#red');
+            var situation = "neutral"
+
+            var id = document.getElementById("blogId");
+            var finalid = id.textContent;
+
+
+
+            btn1.addEventListener('click', function () {
+                if (btn2.classList.contains('red')) {
+                    btn2.classList.remove('red');
+                }
+
+                this.classList.toggle('green');
+
+                if (btn1.classList.contains('green')) {
+                    situation = "liked"
+                } else {
+                    situation = "neutral"
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Request was successful
+                        console.log("\n\n\n\n")
+                        console.log(situation)
+                        console.log("\n\n\n\n")
+
+                    }
+                };
+                xhr.send();
+
+
+
+            });
+
+            btn2.addEventListener('click', function () {
+
+                if (btn1.classList.contains('green')) {
+                    btn1.classList.remove('green');
+                }
+                this.classList.toggle('red');
+
+                if (btn2.classList.contains('red')) {
+                    situation = "disliked"
+                } else {
+                    situation = "neutral"
+                }
+
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Request was successful
+                        console.log("\n\n\n\n")
+                        console.log(situation)
+                        console.log("\n\n\n\n")
+
+                    }
+                };
+                xhr.send();
+
+            });
+        </script>
+
+
         <p>likes: {{details.likeCount}}</p>
         <p>dislikes: {{details.dislikeCount}}</p>
         <p>Views</p>
@@ -22,9 +129,6 @@
 
     <script>
         function addView() {
-
-            console.log("\n\n\nHIIIIIII\n\n")
-
             var x = document.getElementById("viewsCount");
             var id = document.getElementById("blogId");
             var finalid = id.textContent;
@@ -50,6 +154,9 @@
 
         addView()
     </script>
+
+
+
 
 </body>
 
