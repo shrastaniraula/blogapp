@@ -155,23 +155,28 @@ def liked(request):
     situation = request.GET.get('situation')
     id = request.GET.get('id')
     email = request.session.email
+    liked = False
+    disliked = False
+    neutral = False
+
+    if(situation == "liked"):
+        liked = True
+    elif(situation == "disliked"):
+        disliked = True
+    elif(situation== "neutral"):
+        neutral = True
+    else:
+        pass
 
     print(f"\n\n\n{email}\n\n\n")
-
     likes_check = Likes.objects.filter(blogId = id, email = email)
 
     if likes_check.exists():
-        if(situation == "liked"):
-            pass
-        elif(situation == "disliked"):
-            pass
-        elif(situation== "neutral"):
-            pass
-        else:
-            pass
+        likes_check.update()
+        pass
 
     else:
-        liked = Likes.objects.create(id=id, email=email)
+        liked = Likes.objects.create(blogId=id, email=email)
 
 
 
