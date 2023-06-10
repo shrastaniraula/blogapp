@@ -6,25 +6,97 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        body {
+            background-color: #FFDAB9;
+            /* Peach color for the background */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-box {
+            padding: 20px;
+            background-color: #FFFFFF;
+            /* White background color */
+            border-radius: 10px;
+            /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            /* Box shadow */
+            text-align: center;
+            max-width: 400px;
+            /* Adjust the width as needed */
+            width: 100%;
+            /* Set a percentage width for responsiveness */
+        }
+
+        h1 {
+            color: #FF6347;
+            /* Peach color for the heading */
+        }
+
+        label {
+            color: #FF6347;
+            /* Peach color for labels */
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            display: block;
+            width: 95%;
+            border: 1px solid #FF6347;
+            /* Peach color for input borders */
+            border-radius: 5px;
+            /* Rounded corners */
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        input[type="submit"] {
+            background-color: #FF6347;
+            /* Peach color for the submit button */
+            color: #FFF;
+            /* White color for submit button text */
+            cursor: pointer;
+            padding: 12px 20px;
+            /* Increase the padding for a larger button */
+            font-size: 16px;
+            margin-top: 30px;
+            /* Increase the font size */
+            margin-left: 15px;
+        }
+
+        a {
+            color: #FF6347;
+            /* Peach color for links */
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Login Form</h1>
-    <form method="post" action="/users/doLogin">
-        {% csrf_token %}
+    <div class="container">
+        <div class="form-box">
+            <h1>User Login</h1>
+            <form method="post" action="/users/doLogin">
+                {% csrf_token %}
 
-        <label for="email">Email</label>
-        <input type="email" placeholder="email" name="email">
+                <label for="email">Email</label>
+                <input type="email" placeholder="email" name="email">
 
+                <label for="password">Password</label>
+                <input type="password" placeholder="password" name="password">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="password" name="password">
-
-        <input type="submit" value="login">
-
-    </form>
-    <p>Not registered? <a href="/users">Signup</a></p>
-
+                <input type="submit" value="Login">
+            </form>
+            <p>Not registered? <a href="/users">Signup</a></p>
+        </div>
+    </div>
 </body>
 
 </html>

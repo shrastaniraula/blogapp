@@ -6,21 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
+    <!-- <style>
         body {
             margin: 40px;
         }
 
-        /* button { */
-        /* cursor: pointer; */
-        /* outline: 0; */
-        /* color: #AAA; */
-
-        /* } */
-
-        /* .btn:focus {
-            outline: none;
-        } */
 
         .green {
             color: green;
@@ -29,13 +19,59 @@
         .red {
             color: red;
         }
+    </style> -->
+
+    <style>
+        body {
+            margin: 40px;
+            font-family: Arial, sans-serif;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .btn i {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
     </style>
+
 
     <title>Blog</title>
 </head>
 
 <body>
     <div>
+        <p>{{details.date}}</p>
         <p id="blogId" style="display: none;">{{details.id}}</p>
         <h1>{{details.title}}</h1>
         <h2>{{details.description}}</h2>
@@ -44,91 +80,118 @@
 
         <script src="https://use.fontawesome.com/fe459689b4.js"></script>
 
-        <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-        <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-
-        <script>
-            var btn1 = document.querySelector('#green');
-            var btn2 = document.querySelector('#red');
-            var situation = "neutral"
-
-            var id = document.getElementById("blogId");
-            var finalid = id.textContent;
-
-
-
-            btn1.addEventListener('click', function () {
-                
-                if (btn2.classList.contains('red')) {
-                    btn2.classList.remove('red');
-                }
-
-                this.classList.toggle('green');
-
-                if (btn1.classList.contains('green')) {
-                    situation = "liked"
-                } else {
-                    situation = "neutral"
-                }
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Request was successful
-                        console.log("\n\n\n\n")
-                        console.log(situation)
-                        console.log("\n\n\n\n")
-
-                    }
-                };
-                xhr.send();
-
-
-
-            });
-
-            btn2.addEventListener('click', function () {
-
-                if (btn1.classList.contains('green')) {
-                    btn1.classList.remove('green');
-                }
-                this.classList.toggle('red');
-
-                if (btn2.classList.contains('red')) {
-                    situation = "disliked"
-                } else {
-                    situation = "neutral"
-                }
-
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Request was successful
-                        console.log("\n\n\n\n")
-                        console.log(situation)
-                        console.log("\n\n\n\n")
-
-                    }
-                };
-                xhr.send();
-
-            });
-        </script>
-
+        <button class="btn1" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+        <button class="btn2" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
 
         <p>likes: {{details.likeCount}}</p>
         <p>dislikes: {{details.dislikeCount}}</p>
         <p>Views</p>
         <p id="viewsCount">{{details.viewCount}}</p>
 
+        <p id="like_situation" style="display: none;">{{like_situation}}</p>
+        <p id="dislike_situation" style="display: none;">{{dislike_situation}}</p>
+
+
+
+
     </div>
 
     <script>
+        var btn1 = document.querySelector('#green');
+        var btn2 = document.querySelector('#red');
+        var situation = "neutral"
+
+        var id = document.getElementById("blogId");
+        var finalid = id.textContent;
+
+        function showColor() {
+            var like_situation = document.getElementById("like_situation");
+            var dislike_situation = document.getElementById("dislike_situation");
+
+            var l_situation = like_situation.textContent;
+            var d_situation = dislike_situation.textContent;
+            console.log("\n\n\n")
+            console.log(l_situation)
+            console.log(d_situation)
+
+
+            if (l_situation === 'True') {
+                btn1.classList.add('green')
+                console.log("inside 1st")
+            }
+            if (d_situation === 'True') {
+                btn2.classList.add('red')
+                console.log("inside 2nd")
+
+            }
+
+
+        }
+
+        btn1.addEventListener('click', function () {
+
+            if (btn2.classList.contains('red')) {
+                btn2.classList.remove('red');
+            }
+
+            this.classList.toggle('green');
+
+            if (btn1.classList.contains('green')) {
+                situation = "liked"
+            } else {
+                situation = "neutral"
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Request was successful
+
+                }
+            };
+            xhr.send();
+
+            location.reload();
+
+        });
+
+        btn2.addEventListener('click', function () {
+
+            if (btn1.classList.contains('green')) {
+                btn1.classList.remove('green');
+            }
+            this.classList.toggle('red');
+
+            if (btn2.classList.contains('red')) {
+                situation = "disliked"
+            } else {
+                situation = "neutral"
+            }
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/users/liked?situation=' + situation + "&id=" + finalid, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Request was successful
+
+                }
+            };
+            xhr.send();
+
+            location.reload();
+
+        });
+
+        showColor()
+    </script>
+
+
+
+    <!-- <script>
         function addView() {
             var x = document.getElementById("viewsCount");
             var id = document.getElementById("blogId");
@@ -154,7 +217,7 @@
         }
 
         addView()
-    </script>
+    </script> -->
 
 
 

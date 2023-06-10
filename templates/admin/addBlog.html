@@ -5,20 +5,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add FAQ</title>
+    <title>Add Blog</title>
+    <style>
+        body {
+            background-color: #FFDAB9;
+            /* Peach color for the background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .add-blog {
+            text-align: center;
+            padding: 20px;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        .add-blog h1 {
+            color: #FF6347;
+            /* Peach color for the heading */
+            margin-top: 0;
+        }
+
+        .add-blog form {
+            margin-top: 30px;
+        }
+
+        .add-blog input[type="text"] {
+            display: block;
+            width: 300px;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #FF6347;
+            /* Peach color for input borders */
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+
+        .add-blog input[type="submit"] {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #FF6347;
+            /* Peach color for the submit button */
+            color: #FFF;
+            /* White color for submit button text */
+            border: none;
+            border-radius: 5px;
+            /* Rounded corners */
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-button {
+            text-align: right;
+            margin-bottom: 10px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .back-button a {
+            color: #FF6347;
+            /* Peach color for the back button text */
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
-    <a href="/adminWork/home">Back</a>
-    <h1>add Blog</h1>
-    <form method="post" action="/adminWork/addBlog">
-        {% csrf_token %}
-        <input type="text" placeholder="question" name="title">
-        <input type="text" placeholder="answer" name="description">
-        <input type="submit" value="ADD">
-
-
-    </form>
+    <div class="container">
+        <div class="add-blog">
+            <div class="back-button">
+                <a href="/adminWork/home">Back</a>
+            </div>
+            <h1>Add Blog</h1>
+            <form method="post" action="/adminWork/addBlog">
+                {% csrf_token %}
+                <input type="text" placeholder="Question" name="title">
+                <input type="text" placeholder="Answer" name="description">
+                <input type="submit" value="ADD">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

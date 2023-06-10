@@ -25,7 +25,7 @@ urlpatterns = [
     path('doLogin', views.doLoginUser),
     path('visitHome', views.visitHome),
     path('readBlog', views.readBlog),
-    path('viewsCount', views.viewsCount),
+    # path('viewsCount', views.viewsCount),
     path('checkOTTP', views.checkOTTP),
     path('liked', views.liked),
 

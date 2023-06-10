@@ -15,8 +15,8 @@ class User(models.Model):
 
 
 class Likes(models.Model):
-    blogId = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='id')
-    email = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email')
+    blogId = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='name_id')
+    userId = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_id')
     liked = models.BooleanField(default=False)
     disliked = models.BooleanField(default=False)
     neutral = models.BooleanField(default=True)

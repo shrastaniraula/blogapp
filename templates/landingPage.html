@@ -1,17 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blog App</title>
+    <style>
+        body {
+            background-color: #FFDAB9;
+            /* Peach color for the background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+            color: #000;
+            /* Black color for text */
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            padding-left: 80px;
+            padding-right: 80px;
+
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #FF6347;
+            /* Peach color for the button background */
+            color: #FFF;
+            /* White color for button text */
+            font-size: 18px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #FF5733;
+            /* Darker shade of peach on hover */
+        }
+    </style>
 </head>
+
 <body>
-    <a href="/adminWork">
-        Admin
-    </a>
-    <a href="/users">
-        User
-    </a>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to the Blog App</h1>
+            <p>Experience the world of blogging with our interactive and user-friendly platform. Whether you're an
+                administrator looking to manage and publish blog posts, or a user interested in discovering captivating
+                content, our Blog App has you covered.</p>
+
+            <p>Get started now by choosing your role:</p>
+            <button class="button"><a href="/adminWork" style="text-decoration: none; color: white;">Admin</a></button>
+            <button class="button"><a href="/users" style="text-decoration: none;color: white;">User</a></button>
+        </div>
+    </div>
 </body>
+
 </html>

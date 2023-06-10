@@ -72,8 +72,11 @@ def doLoginUser(request):
     user_login = User.objects.filter(email=email, password= password)
 
     if user_login.exists():
-        print("Insideee iffffff")
-        request.session['email'] = email
+        for i in user_login:
+            userId = i.id
+            print(userId)
+
+        request.session['user_id'] = userId
         request.session.save()
 
         return redirect('/users/visitHome')
@@ -90,21 +93,43 @@ def visitHome(request):
 
 def readBlog(request):
     id = request.GET.get('id')
-    details = Blog.objects.get(id=id)
-    print(details)
-    return render(request, 'users/blog.html', {'details': details})
+    views = request.GET.get('views')
+    details = Blog.objects.filter(id=id)
+    user_id = request.session['user_id']
 
-def viewsCount(request):
-    id = request.GET.get('id')
-    view = request.GET.get('view')
-    print(f"\n\nthis is viewwwwww{view} and id{id}\n\n]n")
-    newview = int(view)+1
-    print(f"\n\nthis is Newwww  viewwwwww{newview}\n\n]n")
-
+    #adding views
+    newview = int(views)+1
     object = Blog.objects.filter(id=id)
     object.update(viewCount=newview)
 
-    # return redirect('/users/readBlog?id=1')
+    # checking total likes and dislikes and appeding it in the blogs table
+    like_count = Likes.objects.filter(liked=True, blogId_id=id).count()
+    dislike_count = Likes.objects.filter(disliked=True, blogId_id=id).count()
+    details.update(dislikeCount = dislike_count, likeCount= like_count)
+
+    # getting all the details so as to display in the blog page
+    show = Blog.objects.get(id=id)
+
+    # checking the liked or disliked situtation of that blog by logged in user to display
+    like_dislike = Likes.objects.filter(blogId_id = id, userId_id = user_id)
+
+    # getting the like and disliked of that specific blog id and user
+    if like_dislike.exists():
+        for i in like_dislike:
+            like_situation = i.liked
+            dislike_situation = i.disliked
+        return render(request, 'users/blog.html', {'details': show, 'like_situation': like_situation, 'dislike_situation': dislike_situation})
+    
+    return render(request, 'users/blog.html', {'details': show})
+
+
+# def viewsCount(request):
+#     id = request.GET.get('id')
+#     view = request.GET.get('view')
+#     newview = int(view)+1
+
+#     object = Blog.objects.filter(id=id)
+#     object.update(viewCount=newview)
 
 def mail_sender(request, email):
     # server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -153,30 +178,45 @@ def mail_sender(request, email):
 
 def liked(request):
     situation = request.GET.get('situation')
-    id = request.GET.get('id')
-    email = request.session.email
+    blogid = request.GET.get('id')
+    user = request.session['user_id']
+
+    print("This is user like or dislike of ")
+
     liked = False
     disliked = False
     neutral = False
 
-    if(situation == "liked"):
-        liked = True
-    elif(situation == "disliked"):
-        disliked = True
-    elif(situation== "neutral"):
-        neutral = True
+
+    object = Likes.objects.filter(blogId_id=blogid, userId_id=user)
+
+    if object.exists():
+        if (situation == "liked"):
+            object.update(liked=True, disliked=False, neutral=False)
+            print(situation)
+
+        elif (situation == "disliked"):
+            object.update(liked=False, disliked=True, neutral=False)
+            print(situation)
+
+        elif (situation == "neutral"):
+            object.update(liked=False, disliked=False, neutral=True)
+            print(situation)
     else:
-        pass
+        if (situation == "liked"):
+            Likes.objects.create(blogId_id=blogid, userId_id=user, liked=True)
+            object.update(liked=True, disliked=False, neutral=False)
+            print(situation)
 
-    print(f"\n\n\n{email}\n\n\n")
-    likes_check = Likes.objects.filter(blogId = id, email = email)
+        elif (situation == "disliked"):
+            Likes.objects.create(
+                blogId_id=blogid, userId_id=user, disliked=True)
 
-    if likes_check.exists():
-        likes_check.update()
-        pass
+            print(situation)
+        elif (situation == "neutral"):
+            Likes.objects.create(blogId_id=blogid, userId_id=user, neutral=True)
+            print(situation)
 
-    else:
-        liked = Likes.objects.create(blogId=id, email=email)
+    print(f"\n\n\n{user}\n\n\n")
 
-
-
+    return redirect('http://127.0.0.1:8000/users/readBlog?id=1')

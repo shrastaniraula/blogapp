@@ -5,49 +5,118 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Students</title>
+    <title>View FAQ</title>
+    <style>
+        body {
+            background-color: #FFDAB9;
+            /* Peach color for the background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FF6347;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .view-faq {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .view-faq h1 {
+            color: #FF6347;
+            /* Peach color for the heading */
+            margin-top: 0;
+        }
+
+        .view-faq table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .view-faq th,
+        .view-faq td {
+            padding: 10px;
+            border: 1px solid #FF6347;
+            /* Peach color for table borders */
+        }
+
+        .view-faq th {
+            background-color: #FF6347;
+            /* Peach color for table header background */
+            color: #FFF;
+            /* White color for table header text */
+        }
+
+        .view-faq td {
+            background-color: #FFF;
+            /* White background color for table content */
+        }
+
+        .back-button {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            color: #FF6347;
+            /* Peach color for links */
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-    <a href="/adminWork/home">Back</a>
-    <h1>View FAQ</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Likes</th>
-                <th>Dislikes</th>
-                <th>Date</th>
-                <th>Views</th>
-                <th>Actions</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for each in blog %}
-            <tr>
-                <td>{{each.id}}</td>
-                <td>{{each.title}}</td>
-                <td>{{each.description}}</td>
-                <td>{{each.likeCount}}</td>
-                <td>{{each.dislikeCount}}</td>
-                <td>{{each.date}}</td>
-                <td>{{each.viewCount}}</td>
-
-
-
-                <td>
-                    <a href="/adminWork/editBlog?id={{each.id}}">Edit</a>
-                    <a href="/adminWork/deleteBlog?id={{each.id}}">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="back-button">
+            <a href="/adminWork/home">Back</a>
+        </div>
+        <div class="view-faq">
+            <h1>View FAQ</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th>Date</th>
+                        <th>Views</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for each in blog %}
+                    <tr>
+                        <td>{{each.id}}</td>
+                        <td>{{each.title}}</td>
+                        <td>{{each.description}}</td>
+                        <td>{{each.likeCount}}</td>
+                        <td>{{each.dislikeCount}}</td>
+                        <td>{{each.date}}</td>
+                        <td>{{each.viewCount}}</td>
+                        <td>
+                            <a href="/adminWork/editBlog?id={{each.id}}">Edit</a>
+                            <a href="/adminWork/deleteBlog?id={{each.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>

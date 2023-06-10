@@ -3,6 +3,7 @@ import traceback
 from django.shortcuts import redirect, render
 from adminWorks.models import Admin
 from adminWorks.models import Blog
+from users.models import Likes
 
 
 # Create your views here.
@@ -63,7 +64,7 @@ def addBlog(request):
 def deleteBlog(request):
     id = request.GET.get('id')
     print("This is get method")
-
+    likedis = Likes.objects.filter(blogId_id=id).delete()
     blog = Blog.objects.get(id=id).delete()
     return redirect('/adminWork/viewBlog')
 
@@ -77,10 +78,11 @@ def updateBlog(request):
     id = request.POST.get("id")
     title = request.POST.get("title")
     description = request.POST.get("description")
-    date = datetime.date.today
+    # date = datetime.date.today
+
 
     verify = Blog.objects.filter(id=id)
-    verify.update(title=title, description= description, date= date)
+    verify.update(title=title, description= description)
     return redirect('/adminWork/viewBlog')
 
 

@@ -6,19 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
+    <style>
+        body {
+            background-color: #FFDAB9;
+            /* Peach color for the background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .blog-post {
+            margin-bottom: 20px;
+            background-color: #FFF;
+            /* White background color for each blog post */
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .blog-post h1 {
+            color: #FF6347;
+            /* Peach color for blog post title */
+            margin-top: 0;
+        }
+
+        .blog-post p {
+            margin: 10px 0;
+        }
+
+        .blog-post a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF6347;
+            /* Peach color for the button background */
+            color: #FFF;
+            /* White color for button text */
+            text-decoration: none;
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+    </style>
 </head>
 
 <body>
-    <p>HOME PAGE</p>
-    {% for each in blog %}
-    <div>
-        <h1>{{each.title}}</h1>
-        <p>{{each.date}}</p>
-        <p>View: {{each.viewCount}}</p>
-        <a href="/users/readBlog?id={{each.id}}">Read Now</a>
+    <div class="container">
+        <p>HOME PAGE</p>
+        {% for each in blog %}
+        <div class="blog-post">
+            <h1>{{each.title}}</h1>
+            <p>{{each.date}}</p>
+            <p>View: {{each.viewCount}}</p>
+            <a href="/users/readBlog?id={{each.id}}&views={{each.viewCount}}">Read Now</a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-
 </body>
 
 </html>
