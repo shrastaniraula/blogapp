@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,16 +30,19 @@
         }
 
         h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 44px;
+            margin-bottom: 50px;
+            color: #fe3f1d;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         p {
             font-size: 18px;
             margin-bottom: 40px;
             line-height: 1.5;
-            padding-left: 80px;
-            padding-right: 80px;
+            padding-left: 60px;
+            padding-right: 40px;
+
 
         }
 
@@ -60,8 +64,13 @@
         }
 
         .button:hover {
-            background-color: #FF5733;
+            background-color: #fe3f1d;
             /* Darker shade of peach on hover */
+        }
+
+        img {
+            height: 500px;
+            width: 550px;
         }
     </style>
 </head>
@@ -77,6 +86,9 @@
             <p>Get started now by choosing your role:</p>
             <button class="button"><a href="/adminWork" style="text-decoration: none; color: white;">Admin</a></button>
             <button class="button"><a href="/users" style="text-decoration: none;color: white;">User</a></button>
+        </div>
+        <div class="content">
+            <img src="{% static 'media/images/landing.png' %}">
         </div>
     </div>
 </body>

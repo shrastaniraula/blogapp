@@ -93,13 +93,16 @@ def visitHome(request):
 
 def readBlog(request):
     id = request.GET.get('id')
-    views = request.GET.get('views')
+    # views = request.GET.get('views')
     details = Blog.objects.filter(id=id)
     user_id = request.session['user_id']
 
     #adding views
-    newview = int(views)+1
     object = Blog.objects.filter(id=id)
+    for i in object:
+        views= i.viewCount
+    
+    newview = int(views)+1
     object.update(viewCount=newview)
 
     # checking total likes and dislikes and appeding it in the blogs table

@@ -78,7 +78,7 @@
         }
     </style>
 
-    <title>Login</title>
+    <title>Admin Login</title>
 </head>
 
 <body>
@@ -87,13 +87,14 @@
             <h1>Admin Login</h1>
             <form method="post" action="/adminWork/doLogin">
                 {% csrf_token %}
+                <p style="color: blueviolet; font-weight: bold;">{{message}}</p>
 
                 <label for="email">Email</label>
-                <input type="email" placeholder="email" name="email">
+                <input type="email" placeholder="Enter your email" name="email">
 
 
                 <label for="password">Password</label>
-                <input type="password" placeholder="password" name="password">
+                <input type="password" placeholder="Enter your password" name="password">
 
                 <input type="submit" value="login">
 

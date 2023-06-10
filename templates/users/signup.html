@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>User Signup</title>
     <style>
         body {
             background-color: #FFDAB9;
@@ -61,16 +61,16 @@
 
         input[type="submit"] {
             background-color: #FF6347;
-            /* Peach color for the submit button */
             color: #FFF;
-            /* White color for submit button text */
             cursor: pointer;
             padding: 12px 20px;
-            /* Increase the padding for a larger button */
             font-size: 16px;
             margin-top: 30px;
-            /* Increase the font size */
             margin-left: 15px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #fa401f;
         }
 
         a {
@@ -82,22 +82,24 @@
 
 <body>
     <div class="container">
+
         <div class="form-box">
             <h1>Signup Form</h1>
             <form method="post" action="/users/signupUser">
                 {% csrf_token %}
+                <p style="color: blueviolet; font-weight: bold;">{{message}}</p>
 
                 <label for="email">Email</label>
-                <input type="email" placeholder="email" name="email">
+                <input type="email" placeholder="Enter your email" name="email">
 
                 <label for="name">Name</label>
-                <input type="text" placeholder="name" name="name">
+                <input type="text" placeholder="Enter your name" name="name">
 
                 <label for="password1">Password</label>
-                <input type="password" placeholder="password" name="password1">
+                <input type="password" placeholder="Enter your password" name="password1">
 
                 <label for="password2">Confirm Password</label>
-                <input type="password" placeholder="confirm password" name="password2">
+                <input type="password" placeholder="Confirm your password" name="password2">
 
                 <input id="validateButton" type="submit" value="Signup">
             </form>
