@@ -25,7 +25,7 @@
         .add-blog {
             text-align: center;
             padding: 20px;
-            max-width: 500px;
+            /* max-width: 500px; */
             margin-top: 20px;
         }
 
@@ -39,15 +39,14 @@
             margin-top: 30px;
         }
 
-        .add-blog input[type="text"] {
+        .add-blog input[type="text"],
+        textarea {
             display: block;
-            width: 300px;
-            margin: 10px auto;
+            width: 800px;
+            margin: 10px ;
             padding: 10px;
             border: 1px solid #FF6347;
-            /* Peach color for input borders */
             border-radius: 5px;
-            /* Rounded corners */
         }
 
         .add-blog input[type="submit"] {
@@ -56,29 +55,27 @@
             margin: 20px auto;
             padding: 12px;
             background-color: #FF6347;
-            /* Peach color for the submit button */
             color: #FFF;
-            /* White color for submit button text */
             border: none;
             border-radius: 5px;
-            /* Rounded corners */
             cursor: pointer;
             font-size: 16px;
         }
 
         .back-button {
             text-align: right;
-            margin-bottom: 10px;
+            margin: 20px;
             position: absolute;
             top: 10px;
             right: 10px;
         }
 
         .back-button a {
-            color: #FF6347;
-            /* Peach color for the back button text */
+            color: white;
             text-decoration: none;
-            font-size: 14px;
+            background-color: #FF6347;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -92,8 +89,8 @@
             <h1>Add Blog</h1>
             <form method="post" action="/adminWork/addBlog">
                 {% csrf_token %}
-                <input type="text" placeholder="Question" name="title">
-                <input type="text" placeholder="Answer" name="description">
+                <input type="text" placeholder="Enter the blog title" name="title">
+                <textarea placeholder="Enter the blog description" name="description" rows="20"></textarea>
                 <input type="submit" value="ADD">
             </form>
         </div>

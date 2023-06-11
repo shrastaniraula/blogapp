@@ -9,9 +9,6 @@ from .models import User
 from adminWorks.models import Blog
 from .models import Likes
 
-
-# Create your views here.
-
 def seeLogin(request):
     return render(request, 'users/login.html')
 
@@ -93,17 +90,9 @@ def visitHome(request):
 
 def readBlog(request):
     id = request.GET.get('id')
-    # views = request.GET.get('views')
     details = Blog.objects.filter(id=id)
     user_id = request.session['user_id']
 
-    #adding views
-    object = Blog.objects.filter(id=id)
-    for i in object:
-        views= i.viewCount
-    
-    newview = int(views)+1
-    object.update(viewCount=newview)
 
     # checking total likes and dislikes and appeding it in the blogs table
     like_count = Likes.objects.filter(liked=True, blogId_id=id).count()
@@ -125,14 +114,17 @@ def readBlog(request):
     
     return render(request, 'users/blog.html', {'details': show})
 
+def addView(request):
+    id = request.GET.get('id')
+    object = Blog.objects.filter(id=id)
+    for i in object:
+        views= i.viewCount
+    
+    newview = int(views)+1
+    object.update(viewCount=newview)
 
-# def viewsCount(request):
-#     id = request.GET.get('id')
-#     view = request.GET.get('view')
-#     newview = int(view)+1
+    return render(request, status=200)
 
-#     object = Blog.objects.filter(id=id)
-#     object.update(viewCount=newview)
 
 def mail_sender(request, email):
     # server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -222,4 +214,4 @@ def liked(request):
 
     print(f"\n\n\n{user}\n\n\n")
 
-    return redirect('http://127.0.0.1:8000/users/readBlog?id=1')
+    # return redirect('http://127.0.0.1:8000/users/readBlog?id=1')

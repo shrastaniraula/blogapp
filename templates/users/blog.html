@@ -6,98 +6,155 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- <style>
-        body {
-            margin: 40px;
-        }
 
-
-        .green {
-            color: green;
-        }
-
-        .red {
-            color: red;
-        }
-    </style> -->
 
     <style>
         body {
-            margin: 40px;
+            background-color: #FFDAB9;
+            /* Peach color for the background */
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        div {
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow: inherit;
+
+        }
+
+        .blog-post {
             margin-bottom: 20px;
+            margin-top: 40px;
+            background-color: #FFF;
+            padding-top: 20px;
+            padding-right: 50px;
+            padding-left: 50px;
+            padding-bottom: 1opx;
+            border-radius: 5px;
         }
 
-        h1 {
-            font-size: 20px;
-            margin-bottom: 10px;
+        .blog-post-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0;
+
         }
 
-        h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .btn {
+        button {
             border: none;
             background: none;
             cursor: pointer;
         }
 
-        .btn i {
-            font-size: 20px;
-            vertical-align: middle;
-        }
 
-        .green {
-            color: green;
+        .blueviolet {
+            color: blueviolet;
         }
 
         .red {
             color: red;
         }
 
+        i {
+            font-size: 1.5em;
+        }
+
+        .small-content {
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: #FF6347;
+            margin-top: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
         p {
-            margin-bottom: 5px;
+            margin-top: 0;
+            text-align: justify;
+        }
+
+        .back-button {
+            text-align: right;
+            margin: 20px;
+
+        }
+
+        .back-button a {
+            color: white;
+            text-decoration: none;
+            background-color: #FF6347;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
     </style>
-
 
     <title>Blog</title>
 </head>
 
 <body>
-    <div>
-        <p>{{details.date}}</p>
-        <p id="blogId" style="display: none;">{{details.id}}</p>
-        <h1>{{details.title}}</h1>
-        <h2>{{details.description}}</h2>
+    <div class="back-button">
+        <a href="/users/visitHome">Back</a>
+    </div>
+    <div class="container">
+
+        <div class="blog-post">
+            <div class="blog-post-content">
+                <p id="blogId" style="display: none;">{{details.id}}</p>
+                <h2 class="small-content">{{details.title}}</h2>
+                <p style="padding-bottom: 18px; color:grey;">{{details.date}}</p>
+            </div>
+
+            <div class="blog-post-content">
+                <p style=" padding: 0;">{{details.description}}</p>
+            </div>
+
+            <div class="blog-post-content" style="display: flex; justify-content: space-around;">
+
+                <div class="small-content">
+                    <button class="btn1" id="blueviolet">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    <p>{{details.likeCount}} likes</p>
+                </div>
+
+                <hr style="height:40px; width:0px">
+
+                <div class="small-content">
+                    <button class="btn2" id="red">
+                        <i class="fa-solid fa-heart-crack"></i>
+                    </button>
+                    <p>{{details.dislikeCount}} dislikes</p>
+                </div>
+
+                <hr style="height:40px; width:0px">
+
+                <div class="small-content">
+                    <i class="fa-solid fa-binoculars"></i>
+                    <p id="viewsCount">{{details.viewCount}} views</p>
+                </div>
 
 
+            </div>
 
-        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+            <p id="like_situation" style="display: none;">{{like_situation}}</p>
+            <p id="dislike_situation" style="display: none;">{{dislike_situation}}</p>
 
-        <button class="btn1" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
-        <button class="btn2" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
-
-        <p>likes: {{details.likeCount}}</p>
-        <p>dislikes: {{details.dislikeCount}}</p>
-        <p>Views</p>
-        <p id="viewsCount">{{details.viewCount}}</p>
-
-        <p id="like_situation" style="display: none;">{{like_situation}}</p>
-        <p id="dislike_situation" style="display: none;">{{dislike_situation}}</p>
-
-
-
-
+        </div>
     </div>
 
+    <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+    <script src="https://kit.fontawesome.com/34a317a243.js" crossorigin="anonymous"></script>
+
     <script>
-        var btn1 = document.querySelector('#green');
+        var btn1 = document.querySelector('#blueviolet');
         var btn2 = document.querySelector('#red');
         var situation = "neutral"
 
@@ -110,22 +167,14 @@
 
             var l_situation = like_situation.textContent;
             var d_situation = dislike_situation.textContent;
-            console.log("\n\n\n")
-            console.log(l_situation)
-            console.log(d_situation)
-
 
             if (l_situation === 'True') {
-                btn1.classList.add('green')
-                console.log("inside 1st")
+                btn1.classList.add('blueviolet')
             }
+
             if (d_situation === 'True') {
                 btn2.classList.add('red')
-                console.log("inside 2nd")
-
             }
-
-
         }
 
         btn1.addEventListener('click', function () {
@@ -134,9 +183,9 @@
                 btn2.classList.remove('red');
             }
 
-            this.classList.toggle('green');
+            this.classList.toggle('blueviolet');
 
-            if (btn1.classList.contains('green')) {
+            if (btn1.classList.contains('blueviolet')) {
                 situation = "liked"
             } else {
                 situation = "neutral"
@@ -159,8 +208,8 @@
 
         btn2.addEventListener('click', function () {
 
-            if (btn1.classList.contains('green')) {
-                btn1.classList.remove('green');
+            if (btn1.classList.contains('blueviolet')) {
+                btn1.classList.remove('blueviolet');
             }
             this.classList.toggle('red');
 

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,6 @@
     <style>
         body {
             background-color: #FFDAB9;
-            /* Peach color for the background */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,13 +25,15 @@
         .admin-links {
             text-align: center;
             margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .admin-links h1 {
             font-size: 28px;
             margin-bottom: 30px;
             color: #FF6347;
-            /* Peach color for the heading */
         }
 
         .admin-links a {
@@ -39,19 +41,20 @@
             margin: 10px;
             padding: 15px 25px;
             background-color: #FF6347;
-            /* Peach color for the button background */
             color: #FFF;
-            /* White color for button text */
             font-size: 18px;
             text-decoration: none;
             border-radius: 5px;
-            /* Rounded corners */
             transition: background-color 0.3s ease;
         }
 
         .admin-links a:hover {
             background-color: #FF5733;
-            /* Darker shade of peach on hover */
+        }
+
+        img {
+            height: 450px;
+            width: 500px;
         }
     </style>
 </head>
@@ -59,9 +62,16 @@
 <body>
     <div class="container">
         <div class="admin-links">
-            <h1>Welcome to the Admin Homepage</h1>
-            <a href="/adminWork/SeeAddBlog">Add Blog</a>
-            <a href="/adminWork/viewBlog">View Blogs</a>
+            <div style="padding-right: 50px;">
+                <h1>Welcome to the Admin Homepage</h1>
+                <p>Hey, there. Have a good day. Choose your tasks:</p>
+                <a href="/adminWork/SeeAddBlog">Add Blog</a>
+                <a href="/adminWork/viewBlog">View Blogs</a>
+            </div>
+            <div>
+                <img src="{% static 'media/images/Admin.png' %}">
+            </div>
+
         </div>
     </div>
 </body>

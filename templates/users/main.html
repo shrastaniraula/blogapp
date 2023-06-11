@@ -28,7 +28,8 @@
             border-radius: 5px;
         }
 
-        .blog-post h2 {
+        .blog-post-content h2,
+        h3 {
             color: #FF6347;
             margin-top: 0;
             font-family: 'Times New Roman', Times, serif;
@@ -53,40 +54,86 @@
             /* display: inline-block; */
             /* padding: 10px 18px; */
             color: #fe3f1d;
+            cursor: pointer;
             /* background-color: rgb(233, 233, 233); */
 
         }
 
-        .blog-post-content {
+        .blog-post-content,
+        .right-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .icons {
+            margin-right: 10px;
+        }
+
+        .paragraph p {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Adjust this value to control the number of lines displayed */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
-        <p>HOME PAGE</p>
+        <div class="blog-post-content">
+            <h3>THE BLOG APP</h3>
+            <div class="right-content">
+                <p class="icons">Search</p>
+                <p class="icons">user</p>
+            </div>
+
+        </div>
         {% for each in blog %}
         <div class="blog-post">
 
             <div class="blog-post-content">
-                <h2 class="small-content">{{each.title}}</h2>
-                <p class="small-content" style="padding-bottom: 18px; color:grey;">{{each.date}}</p>
+                <h2>{{each.title}}</h2>
+                <p style="padding-bottom: 18px; color:grey;">{{each.date}}</p>
             </div>
-            <p style="height: 30px; padding: 0;">{{each.description}}</p>
+            <div class="paragraph">
+
+                <p style="height: 40px; padding: 0; overflow: hidden;">{{each.description}}</p>
+            </div>
             <div class="blog-post-content">
-                <a class="small-content2" href="/users/readBlog?id={{each.id}}"
-                    style="padding-left:220px;">{{each.viewCount}} Views</a>
+                <a onclick="addViews({{each.id}})" style="padding-left:220px;">{{each.viewCount}}
+                    Views</a>
                 <hr style="height:30px; width:0px">
-                <a class="small-content2" href="/users/readBlog?id={{each.id}}" style="padding-right:220px;">Read
+                <a onclick="addViews({{each.id}})" style="padding-right:220px;">Read
                     Now</a>
             </div>
 
         </div>
         {% endfor %}
     </div>
+
+    <script>
+        function addViews(id) {
+            console.log(id)
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/users/addView?id=' + id, true)
+
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Request was successful
+
+                }
+            };
+
+            window.location.href = "/users/readBlog?id=" + id;
+
+            xhr.send();
+        }
+    </script>
 </body>
 
 </html>

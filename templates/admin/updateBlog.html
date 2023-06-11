@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Blog</title>
+    <title>Update Blog</title>
     <style>
         body {
             background-color: #FFDAB9;
@@ -25,13 +25,12 @@
         .add-blog {
             text-align: center;
             padding: 20px;
-            max-width: 500px;
+            /* max-width: ; */
             margin-top: 20px;
         }
 
         .add-blog h1 {
             color: #FF6347;
-            /* Peach color for the heading */
             margin-top: 0;
         }
 
@@ -39,15 +38,14 @@
             margin-top: 30px;
         }
 
-        .add-blog input[type="text"] {
+        .add-blog input[type="text"],
+        textarea {
             display: block;
-            width: 300px;
+            width: 800px;
             margin: 10px auto;
             padding: 10px;
             border: 1px solid #FF6347;
-            /* Peach color for input borders */
             border-radius: 5px;
-            /* Rounded corners */
         }
 
         .add-blog input[type="submit"] {
@@ -56,12 +54,9 @@
             margin: 20px auto;
             padding: 12px;
             background-color: #FF6347;
-            /* Peach color for the submit button */
             color: #FFF;
-            /* White color for submit button text */
             border: none;
             border-radius: 5px;
-            /* Rounded corners */
             cursor: pointer;
             font-size: 16px;
         }
@@ -69,16 +64,18 @@
         .back-button {
             text-align: right;
             margin-bottom: 10px;
+            margin-top: 10px;
             position: absolute;
             top: 10px;
             right: 10px;
         }
 
         .back-button a {
-            color: #FF6347;
-            /* Peach color for the back button text */
+            color: white;
             text-decoration: none;
-            font-size: 14px;
+            background-color: #FF6347;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -94,7 +91,7 @@
                 {% csrf_token %}
                 <input type="text" value="{{details.id}}" name="id" readonly>
                 <input type="text" value="{{details.title}}" name="title">
-                <input type="text" value="{{details.description}}" name="description">
+                <textarea name="description" rows="20">{{details.description}}</textarea>
                 <input type="submit" value="UPDATE">
             </form>
         </div>
